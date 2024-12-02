@@ -122,7 +122,7 @@ public class Maze {
             for (int column = 0; column < mazeRow.length; column++) {
                 char pipe = mazeRow[column];
                 String nodeString = visitedNode(distanceByRowAndColumn, row, column)
-                        .map(distance -> STR."\{(char) 27}[31m\{asciiArt(pipe)}\{(char) 27}[39m")
+                        .map(distance -> "\u001b[31m" + asciiArt(pipe) + "\u001b[39m")
                         .orElse(asciiArt(pipe));
                 distanceMap.append(nodeString);
             }
@@ -190,11 +190,11 @@ public class Maze {
 
     private static String partitionArt(boolean walkingOnLoop, int crossed, char pipe) {
         if (walkingOnLoop) {
-            return STR."\{(char) 27}[37m\{asciiArt(pipe)}\{(char) 27}[39m";
+            return "\u001b[37m" + asciiArt(pipe) + "\u001b[39m";
         }
         return crossed % 2 == 0
-                ? STR."\{(char) 27}[32mO\{(char) 27}[39m"
-                : STR."\{(char) 27}[31mI\{(char) 27}[39m";
+                ? "\u001b[32mO\u001b[39m"
+                : "\u001b[31mI\u001b[39m";
     }
 
     private static String asciiArt(char pipe) {
