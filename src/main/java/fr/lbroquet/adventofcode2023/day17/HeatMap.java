@@ -43,7 +43,7 @@ public class HeatMap {
                 Position position = new Position(row, column);
                 if (visited.containsKey(position)) {
                     Heading heading = visited.get(position).heading();
-                    map.append(STR."\{(char) 27}[31m\{headingChar(heading)}\{(char) 27}[39m");
+                    map.append("\u001b[31m" + headingChar(heading) + "\u001b[39m");
                 } else {
                     map.append(mapRow[column]);
                 }
