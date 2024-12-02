@@ -18,14 +18,10 @@ public class Main {
         Input.load(Main.class).lines().map(SEPARATOR::split).forEach(Main::collectIds);
         sort(leftList);
         sort(rightList);
-        long totalDistance = 0;
-        while (!leftList.isEmpty()) {
-            int leftId = leftList.removeFirst();
-            int rightId = rightList.removeFirst();
-            int distance = Math.abs(leftId - rightId);
-            totalDistance += distance;
-        }
+        long totalDistance = totalDistance(new ArrayList<>(leftList), new ArrayList<>(rightList));
+        long similarity = similarity(new ArrayList<>(leftList), new ArrayList<>(rightList));
         System.out.println("total distance: " + totalDistance);
+        System.out.println("similarity: " + similarity);
     }
 
     private static void collectIds(String[] ids) {
@@ -33,5 +29,38 @@ public class Main {
         int rightId = Integer.parseInt(ids[1]);
         leftList.add(leftId);
         rightList.add(rightId);
+    }
+
+    private static long totalDistance(List<Integer> leftList, List<Integer> rightList) {
+        long totalDistance = 0;
+        while (!leftList.isEmpty()) {
+            int leftId = leftList.removeFirst();
+            int rightId = rightList.removeFirst();
+            int distance = Math.abs(leftId - rightId);
+            totalDistance += distance;
+        }
+        return totalDistance;
+    }
+
+    private static long similarity(List<Integer> leftList, List<Integer> rightList) {
+        long similarity = 0;
+        while (!leftList.isEmpty()) {
+            int leftId = leftList.removeFirst();
+            long duplicationsInRightList = duplications(leftId, rightList);
+            similarity += (long) leftId * duplicationsInRightList;
+        }
+        return similarity;
+    }
+
+    private static long duplications(int id, List<Integer> list) {
+        while (!list.isEmpty() && list.getFirst() < id) {
+            list.removeFirst();
+        }
+        long duplicatesInRightList = 0;
+        while (!list.isEmpty() && list.getFirst() == id) {
+            duplicatesInRightList++;
+            list.removeFirst();
+        }
+        return duplicatesInRightList;
     }
 }
