@@ -19,9 +19,10 @@ public record Equation(long test, long[] operands) {
             results.clear();
             Long nextOperand = remainingOperands.removeFirst();
             while (!intermediateResults.isEmpty()) {
-                Long secondOperand = intermediateResults.removeFirst();
-                results.add(addExact(secondOperand, nextOperand));
-                results.add(multiplyExact(secondOperand, nextOperand));
+                Long previousResult = intermediateResults.removeFirst();
+                results.add(addExact(previousResult, nextOperand));
+                results.add(multiplyExact(previousResult, nextOperand));
+                results.add(Long.parseLong(String.valueOf(previousResult).concat(String.valueOf(nextOperand))));
             }
         }
         return results.contains(test);
