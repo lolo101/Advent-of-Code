@@ -15,4 +15,13 @@ public enum Facing {
             case WEST -> NORTH;
         };
     }
+
+    Position forward(Position position) {
+        return switch (this) {
+            case NORTH -> new Position(position.row() - 1, position.column());
+            case EAST -> new Position(position.row(), position.column() + 1);
+            case SOUTH -> new Position(position.row() + 1, position.column());
+            case WEST -> new Position(position.row(), position.column() - 1);
+        };
+    }
 }
