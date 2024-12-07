@@ -9,6 +9,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         SituationMap situationMap = load();
         System.out.println("visited positions: " + situationMap.visitedPositions());
+        System.out.println("possible obstructions: " + situationMap.possibleObstructions());
+        System.out.println(situationMap.print());
     }
 
     private static SituationMap load() throws IOException {
