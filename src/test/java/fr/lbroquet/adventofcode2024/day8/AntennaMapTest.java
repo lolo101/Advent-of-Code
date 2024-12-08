@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AntennaMapTest {
 
     @Test
-    void should_find_simple_antinodes() {
+    void should_find_antinodes_in_line() {
         String input = """
                 .....
                 .a...
@@ -17,7 +17,7 @@ class AntennaMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         AntennaMap antennaMap = new AntennaMap(array);
-        assertEquals(2, antennaMap.countAntinodes());
+        assertEquals(5, antennaMap.countAntinodes());
     }
 
     @Test
@@ -31,7 +31,7 @@ class AntennaMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         AntennaMap antennaMap = new AntennaMap(array);
-        assertEquals(6, antennaMap.countAntinodes());
+        assertEquals(12, antennaMap.countAntinodes());
     }
 
     @Test
@@ -47,7 +47,39 @@ class AntennaMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         AntennaMap antennaMap = new AntennaMap(array);
+        assertEquals(7, antennaMap.countAntinodes());
+    }
+
+    @Test
+    void should_count_spreaded_antinodes() {
+        String input = """
+                .....
+                ..a..
+                .....
+                ..a..
+                .....
+                .....
+                .....
+                """;
+        char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
+        AntennaMap antennaMap = new AntennaMap(array);
         assertEquals(3, antennaMap.countAntinodes());
+    }
+
+    @Test
+    void should_count_only_antennas_antinodes() {
+        String input = """
+                .a..
+                ....
+                a...
+                ....
+                ....
+                ....
+                ....
+                """;
+        char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
+        AntennaMap antennaMap = new AntennaMap(array);
+        assertEquals(2, antennaMap.countAntinodes());
     }
 
     @Test
@@ -61,6 +93,6 @@ class AntennaMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         AntennaMap antennaMap = new AntennaMap(array);
-        assertEquals(1, antennaMap.countAntinodes());
+        assertEquals(5, antennaMap.countAntinodes());
     }
 }

@@ -2,17 +2,19 @@ package fr.lbroquet.adventofcode2024.day8;
 
 import java.util.*;
 
+import static java.lang.Math.min;
+
 public class AntennaMap {
     private final char[][] map;
     private final Map<Character, List<Location>> antennas = new HashMap<>();
 
     public AntennaMap(char[][] map) {
         this.map = map;
-        for (int x = 0; x < map.length; x++) {
-            for (int y = 0; y < map[x].length; y++) {
-                char tile = map[x][y];
+        for (int row = 0; row < map.length; row++) {
+            for (int column = 0; column < map[row].length; column++) {
+                char tile = map[row][column];
                 if (tile != '.') {
-                    antennas.computeIfAbsent(tile, _ -> new ArrayList<>()).add(new Location(x, y));
+                    antennas.computeIfAbsent(tile, _ -> new ArrayList<>()).add(new Location(row, column));
                 }
             }
         }
@@ -23,7 +25,6 @@ public class AntennaMap {
                 .stream()
                 .map(this::toFrequencyAntinodes)
                 .flatMap(Collection::stream)
-                .filter(this::withinBounds)
                 .distinct()
                 .count();
     }
@@ -41,18 +42,46 @@ public class AntennaMap {
         return antinodes;
     }
 
-    private static Collection<Location> antinodesForCouple(Location firstAntenna, Location secondAntenna) {
-        int deltaX = secondAntenna.x() - firstAntenna.x();
-        int deltaY = secondAntenna.y() - firstAntenna.y();
-        return List.of(
-                new Location(firstAntenna.x() - deltaX, firstAntenna.y() - deltaY),
-                new Location(firstAntenna.x() + 2 * deltaX, firstAntenna.y() + 2 * deltaY)
+    private Collection<Location> antinodesForCouple(Location firstAntenna, Location secondAntenna) {
+        int deltaRow = secondAntenna.row() - firstAntenna.row();
+        int deltaColumn = secondAntenna.column() - firstAntenna.column();
+        int numberOfDeltaFromFirstAntennaToEdge = min(
+                numberOfDeltaFromRowToEdge(firstAntenna.row(), deltaRow),
+                numberOfDeltaFromColumnToEdge(firstAntenna.column(), deltaColumn)
         );
+        int minRow = firstAntenna.row() - numberOfDeltaFromFirstAntennaToEdge * deltaRow;
+        int minColumn = firstAntenna.column() - numberOfDeltaFromFirstAntennaToEdge * deltaColumn;
+        Collection<Location> antinodes = new ArrayList<>();
+        for (
+                int row = minRow, column = minColumn;
+                withinBounds(row, column);
+                row += deltaRow, column += deltaColumn) {
+            antinodes.add(new Location(row, column));
+        }
+        return antinodes;
     }
 
-    private boolean withinBounds(Location location) {
-        int x = location.x();
-        int y = location.y();
-        return 0 <= x && x < map.length && 0 <= y && y < map[x].length;
+    private int numberOfDeltaFromRowToEdge(int row, int deltaRow) {
+        if (deltaRow < 0) {
+            return (row - map.length + 1) / deltaRow;
+        }
+        if (deltaRow > 0) {
+            return row / deltaRow;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    private int numberOfDeltaFromColumnToEdge(int column, int deltaColumn) {
+        if (deltaColumn < 0) {
+            return (column - map[0].length + 1) / deltaColumn;
+        }
+        if (deltaColumn > 0) {
+            return column / deltaColumn;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    private boolean withinBounds(int row, int column) {
+        return 0 <= row && row < map.length && 0 <= column && column < map[row].length;
     }
 }
