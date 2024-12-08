@@ -73,4 +73,51 @@ class SituationMapTest {
         System.out.println(situationMap.print());
         assertEquals(1, situationMap.possibleObstructions());
     }
+
+    @Test
+    void should_meet_possible_obstructions_multiple_times() {
+        String input = """
+                .##.
+                ....
+                ..^.
+                #...
+                ..#.
+                """;
+        char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
+        SituationMap situationMap = new SituationMap(array);
+        System.out.println(situationMap.print());
+        assertEquals(1, situationMap.possibleObstructions());
+    }
+
+    @Test
+    void should_not_be_possible_to_obstructions_an_already_visited_position() {
+        String input = """
+                #...
+                ...#
+                ...#
+                ^...
+                #...
+                ..#.
+                """;
+        char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
+        SituationMap situationMap = new SituationMap(array);
+        System.out.println(situationMap.print());
+        assertEquals(1, situationMap.possibleObstructions());
+    }
+
+    @Test
+    void should_bounce_on_possible_obstruction_under_multiple_directions() {
+        String input = """
+                ..#.#..
+                ...#..#
+                .#.....
+                .^.....
+                #..#...
+                ..#.#..
+                """;
+        char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
+        SituationMap situationMap = new SituationMap(array);
+        System.out.println(situationMap.print());
+        assertEquals(2, situationMap.possibleObstructions());
+    }
 }
