@@ -8,8 +8,11 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         String diskMap = loadDiskMap();
-        Checksum checksum = new Checksum(diskMap);
-        System.out.println("Disk checksum: " + checksum.defragmentedValue());
+        BlockwiseChecksum blockwiseChecksum = new BlockwiseChecksum(diskMap);
+        System.out.println("Disk Blockwise Checksum: " + blockwiseChecksum.defragmentedValue());
+
+        WholeFileChecksum wholeFileChecksum = new WholeFileChecksum(diskMap);
+        System.out.println("Disk Whole File Checksum: " + wholeFileChecksum.defragmentedValue());
     }
 
     private static String loadDiskMap() throws IOException {

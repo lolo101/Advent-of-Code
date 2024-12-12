@@ -5,13 +5,13 @@ import java.util.List;
 
 import static java.lang.Math.*;
 
-public class Checksum {
+public class BlockwiseChecksum {
     private final List<Integer> files = new ArrayList<>();
     private final List<Integer> gaps = new ArrayList<>();
     private final Block block = new Block();
 
 
-    public Checksum(String diskMap) {
+    public BlockwiseChecksum(String diskMap) {
         for (int position = 0; position < diskMap.length(); position++) {
             int positionLength = Integer.parseInt(String.valueOf(diskMap.charAt(position)));
             if (position % 2 == 0) {
