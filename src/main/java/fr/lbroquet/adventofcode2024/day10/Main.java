@@ -9,5 +9,6 @@ public class Main {
         char[][] map = Input.loadMap(Main.class);
         TopographicMap topographicMap = new TopographicMap(map);
         System.out.println("Trailheads score sum: " + topographicMap.trailheadsScoreSum());
+        System.out.println("Trailheads rating sum: " + topographicMap.trailheadsRatingSum());
     }
 }

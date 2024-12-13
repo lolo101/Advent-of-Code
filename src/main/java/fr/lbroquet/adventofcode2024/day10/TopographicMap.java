@@ -19,4 +19,8 @@ public class TopographicMap {
     public long trailheadsScoreSum() {
         return trailheads.stream().mapToLong(Trailhead::score).sum();
     }
+
+    public long trailheadsRatingSum() {
+        return trailheads.stream().mapToLong(Trailhead::rating).sum();
+    }
 }

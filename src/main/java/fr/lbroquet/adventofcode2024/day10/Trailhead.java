@@ -9,24 +9,32 @@ import java.util.stream.Stream;
 public class Trailhead {
     private final char[][] map;
     private final Position start;
+    private final Collection<Position> reachablePeaks = new ArrayList<>();
 
     public Trailhead(char[][] map, int row, int column) {
         this.map = map;
         this.start = new Position(new Coordinates(row, column), '0');
+        countTrails();
     }
 
-    public long score() {
+    private void countTrails() {
         List<Position> toVisit = new ArrayList<>();
-        Collection<Position> score = new HashSet<>();
         toVisit.add(start);
         while (!toVisit.isEmpty()) {
             Position position = toVisit.removeFirst();
             if (position.height() == '9')
-                score.add(position);
+                reachablePeaks.add(position);
             else
                 toVisit.addAll(neighbors(position));
         }
-        return score.size();
+    }
+
+    public long score() {
+        return new HashSet<>(reachablePeaks).size();
+    }
+
+    public long rating() {
+        return reachablePeaks.size();
     }
 
     private Collection<Position> neighbors(Position position) {
