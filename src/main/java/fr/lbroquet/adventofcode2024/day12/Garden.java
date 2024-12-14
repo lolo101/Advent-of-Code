@@ -21,7 +21,7 @@ class Garden {
 
     private Plot mergePlotSameRegion(int row, int column, char type) {
         Region region = new Region(type);
-        Plot plot = new Plot(region);
+        Plot plot = new Plot(row, column, region);
         if (row > 0) {
             Plot plotAbove = plots[row - 1][column];
             plotAbove.mergeWithIfSameRegion(plot);
@@ -39,5 +39,13 @@ class Garden {
                 .map(value -> value.region)
                 .collect(toSet());
         return regions.stream().mapToLong(Region::priceOfFencing).sum();
+    }
+
+    public long discountedPriceOfFencing() {
+        Collection<Region> regions = Arrays.stream(plots)
+                .flatMap(Arrays::stream)
+                .map(value -> value.region)
+                .collect(toSet());
+        return regions.stream().mapToLong(Region::discountedPriceOfFencing).sum();
     }
 }

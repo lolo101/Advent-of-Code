@@ -9,5 +9,6 @@ public class Main {
         char[][] map = Input.loadMap(Main.class);
         Garden garden = new Garden(map);
         System.out.println("Price of fencing all regions: " + garden.priceOfFencing());
+        System.out.println("Discounted price of fencing all regions: " + garden.discountedPriceOfFencing());
     }
 }

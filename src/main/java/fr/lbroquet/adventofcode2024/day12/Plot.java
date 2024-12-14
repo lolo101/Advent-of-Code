@@ -1,10 +1,12 @@
 package fr.lbroquet.adventofcode2024.day12;
 
 public class Plot {
+    final Location location;
     Region region;
     int perimeter = 4;
 
-    public Plot(Region region) {
+    public Plot(int row, int column, Region region) {
+        this.location = new Location(row, column);
         this.region = region;
         region.addPlot(this);
     }

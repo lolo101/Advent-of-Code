@@ -25,11 +25,20 @@ public class Region {
         return area() * perimeter();
     }
 
+    public long discountedPriceOfFencing() {
+        return area() * sides();
+    }
+
     private long area() {
         return plots.size();
     }
 
     private long perimeter() {
         return plots.stream().mapToLong(plot -> plot.perimeter).sum();
+    }
+
+    private long sides() {
+        Border border = new Border(plots.stream().map(plot -> plot.location).toList());
+        return border.turns();
     }
 }
