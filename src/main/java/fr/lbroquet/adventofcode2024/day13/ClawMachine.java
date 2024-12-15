@@ -49,7 +49,7 @@ class ClawMachine {
         if (matcherPrize.matches()) {
             Ratio prizeX = Ratio.of(parseLong(matcherPrize.group("prizeX")));
             Ratio prizeY = Ratio.of(parseLong(matcherPrize.group("prizeY")));
-            return new Vector(prizeX, prizeY);
+            return new Vector(prizeX.add(Ratio.of(10000000000000L)), prizeY.add(Ratio.of(10000000000000L)));
         }
         throw new IllegalArgumentException(prize);
     }
