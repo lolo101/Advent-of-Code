@@ -4,8 +4,8 @@ import static fr.lbroquet.adventofcode2024.day14.Main.SPACE_X;
 import static fr.lbroquet.adventofcode2024.day14.Main.SPACE_Y;
 
 class Robot {
-    private int x;
-    private int y;
+    int x;
+    int y;
     private final int vx;
     private final int vy;
 
