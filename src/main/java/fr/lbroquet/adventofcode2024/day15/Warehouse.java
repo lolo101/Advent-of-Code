@@ -1,17 +1,18 @@
 package fr.lbroquet.adventofcode2024.day15;
 
 import java.util.function.Function;
+import java.util.stream.*;
 
 class Warehouse {
     private final char[][] map;
     private Position robot;
 
-    public Warehouse(char[][] map) {
-        this.map = map;
-        robot = findRobot(map);
+    Warehouse(char[][] map) {
+        this.map = Stream.of(map).map(char[]::clone).toArray(char[][]::new);
+        robot = findRobot();
     }
 
-    private static Position findRobot(char[][] map) {
+    private Position findRobot() {
         for (int row = 0; row < map.length; row++) {
             for (int column = 0; column < map[0].length; column++) {
                 if (map[row][column] == '@') {
