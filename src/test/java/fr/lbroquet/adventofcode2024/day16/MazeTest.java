@@ -32,6 +32,20 @@ class MazeTest {
     }
 
     @Test
+    void two_best_pathes() {
+        String input = """
+                #######
+                #....E#
+                #.#.###
+                #S..###
+                #######
+                """;
+        char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
+        Maze maze = new Maze(array);
+        assertEquals(2006, maze.lowestScore());
+    }
+
+    @Test
     void example1() {
         String input = """
                 ###############
