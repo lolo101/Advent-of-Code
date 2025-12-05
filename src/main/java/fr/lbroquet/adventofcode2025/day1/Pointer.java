@@ -9,11 +9,19 @@ public class Pointer {
         this.quantityOfNumbers = quantityOfNumbers;
     }
 
-    void add(int distance) {
-        number = (number + distance) % quantityOfNumbers;
+    int add(int distance) {
+        int unwrappedNewNumber = number + distance;
+        int clicks = unwrappedNewNumber / quantityOfNumbers;
+        number = unwrappedNewNumber % quantityOfNumbers;
+        return clicks;
     }
 
-    void sub(int distance) {
-        number = (number - distance) % quantityOfNumbers;
+    int sub(int distance) {
+        int unwrappedNewNumber = number - distance;
+        int clicks = Math.abs(unwrappedNewNumber / quantityOfNumbers);
+        if (unwrappedNewNumber <= 0 && number > 0) ++clicks;
+        number = unwrappedNewNumber % quantityOfNumbers;
+        if (number < 0) number += quantityOfNumbers;
+        return clicks;
     }
 }

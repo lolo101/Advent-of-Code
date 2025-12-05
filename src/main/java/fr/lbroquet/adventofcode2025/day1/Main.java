@@ -9,18 +9,18 @@ import java.util.stream.Gatherer;
 public class Main {
     static void main() throws IOException {
         try (BufferedReader rotations = Input.load(Main.class)) {
-            long count = rotations.lines()
+            long sum = rotations.lines()
                     .map(Main::toRotation)
-                    .gather(Gatherer.ofSequential(
+                    .gather(Gatherer.<Rotation, Pointer, Integer>ofSequential(
                             () -> new Pointer(50, 100),
                             (pointer, rotation, downstream) -> {
-                                rotation.move(pointer);
-                                if(pointer.number == 0) return downstream.push(rotation);
-                                return true;
+                                int clicks = rotation.move(pointer);
+                                return downstream.push(clicks);
                             }
                     ))
-                    .count();
-            System.out.println("Number of rotations back to zero: " + count);
+                    .mapToInt(Integer::intValue)
+                    .sum();
+            System.out.println("Number of clicks @ zero: " + sum);
         }
     }
 
