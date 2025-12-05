@@ -17,11 +17,9 @@ public class Pointer {
     }
 
     int sub(int distance) {
-        int unwrappedNewNumber = number - distance;
-        int clicks = Math.abs(unwrappedNewNumber / quantityOfNumbers);
-        if (unwrappedNewNumber <= 0 && number > 0) ++clicks;
-        number = unwrappedNewNumber % quantityOfNumbers;
-        if (number < 0) number += quantityOfNumbers;
+        number = (quantityOfNumbers - number) % quantityOfNumbers;
+        int clicks = add(distance);
+        number = (quantityOfNumbers - number) % quantityOfNumbers;
         return clicks;
     }
 }
