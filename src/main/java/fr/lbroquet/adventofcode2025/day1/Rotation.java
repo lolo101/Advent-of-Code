@@ -1,18 +1,18 @@
 package fr.lbroquet.adventofcode2025.day1;
 
 public sealed interface Rotation {
-    int move(Pointer pointer);
+    int move(Dial dial);
 
     record Add(int distance) implements Rotation {
         @Override
-        public int move(Pointer pointer) {
-            return pointer.add(distance);
+        public int move(Dial dial) {
+            return dial.add(distance);
         }
     }
     record Sub(int distance) implements Rotation {
         @Override
-        public int move(Pointer pointer) {
-            return pointer.sub(distance);
+        public int move(Dial dial) {
+            return dial.sub(distance);
         }
     }
 }

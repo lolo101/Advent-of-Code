@@ -11,10 +11,10 @@ public class Main {
         try (BufferedReader rotations = Input.load(Main.class)) {
             long sum = rotations.lines()
                     .map(Main::toRotation)
-                    .gather(Gatherer.<Rotation, Pointer, Integer>ofSequential(
-                            () -> new Pointer(50, 100),
-                            (pointer, rotation, downstream) -> {
-                                int clicks = rotation.move(pointer);
+                    .gather(Gatherer.<Rotation, Dial, Integer>ofSequential(
+                            () -> new Dial(100, 50),
+                            (dial, rotation, downstream) -> {
+                                int clicks = rotation.move(dial);
                                 return downstream.push(clicks);
                             }
                     ))
