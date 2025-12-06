@@ -1,13 +1,16 @@
 package fr.lbroquet.adventofcode2025.day3;
 
 record Bank(String batteries) {
-    public long largestJoltage() {
-        int leftmostHigherJoltage = indexOfLeftmostHigherJoltage(batteries.substring(0, batteries.length() - 1));
-        int rightHigherJoltage = indexOfLeftmostHigherJoltage(batteries.substring(leftmostHigherJoltage + 1));
-        return Long.parseLong("%c%c".formatted(
-                batteries.charAt(leftmostHigherJoltage),
-                batteries.charAt(leftmostHigherJoltage + rightHigherJoltage + 1)
-        ));
+    public long outputJoltage(int quantityOfBatteries) {
+        StringBuilder sb = new StringBuilder(quantityOfBatteries);
+        for (int leftIndex = 0, rightIndex = batteries.length() - quantityOfBatteries + 1;
+        rightIndex <= batteries.length();
+        ++rightIndex) {
+            int leftmostHigherJoltage = indexOfLeftmostHigherJoltage(batteries.substring(leftIndex, rightIndex));
+            sb.append(batteries.charAt(leftIndex + leftmostHigherJoltage));
+            leftIndex += leftmostHigherJoltage + 1;
+        }
+        return Long.parseLong(sb.toString());
     }
 
     private static int indexOfLeftmostHigherJoltage(String subBank) {

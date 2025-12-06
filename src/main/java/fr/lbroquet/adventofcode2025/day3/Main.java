@@ -10,7 +10,7 @@ public class Main {
         try (BufferedReader reader = Input.load(Main.class)) {
             long totalOutputJoltage = reader.lines()
                     .map(Main::toBank)
-                    .mapToLong(Bank::largestJoltage)
+                    .mapToLong(bank -> bank.outputJoltage(12))
                     .sum();
             System.out.println("Total output joltage: " + totalOutputJoltage);
         }
