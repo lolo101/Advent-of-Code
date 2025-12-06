@@ -12,7 +12,7 @@ public class Main {
         return new BufferedReader(new InputStreamReader(inputStream));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         try (BufferedReader reader = loadInput()) {
         }
     }

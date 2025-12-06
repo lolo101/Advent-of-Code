@@ -22,7 +22,7 @@ public class Main {
             "blue", 14
     );
 
-    public static void main(String[] args) {
+    public static void main() {
         BufferedReader input = Input.load(Main.class);
 //        long sum = input.lines().map(Main::toGame).filter(game -> game.isPossible(constraints)).mapToLong(Game::id).sum();
 //        System.out.printf("Sum of IDs of possible games: %d%n", sum);
