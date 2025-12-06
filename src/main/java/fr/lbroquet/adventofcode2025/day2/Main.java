@@ -4,7 +4,7 @@ import fr.lbroquet.Input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.stream.Stream;
 
 public class Main {
@@ -19,7 +19,7 @@ public class Main {
         }
     }
 
-    private static long sum(List<Long> longs) {
+    private static long sum(Collection<Long> longs) {
         return Stream.of(longs.toArray(new Long[0])).mapToLong(Long::longValue).sum();
     }
 

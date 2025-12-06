@@ -1,7 +1,7 @@
 package fr.lbroquet.adventofcode2025.day2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public record Range(String firstId, String lastId) {
     /**
@@ -9,31 +9,41 @@ public record Range(String firstId, String lastId) {
      * E.g. 11, 1212, 123123, 4444 are invalid.
      * @return the quantity of invalid number in this range.
      */
-    public List<Long> invalidIds() {
+    public Set<Long> invalidIds() {
+        Set<Long> result = new HashSet<>();
         long firstIdInclusive = Long.parseLong(firstId);
         long lastIdInclusive = Long.parseLong(lastId);
-        String halfDigits = halfDigits(firstId);
-
-        List<Long> result = new ArrayList<>();
-        for(
-                long invalidId;
-                (invalidId = Long.parseLong(halfDigits + halfDigits)) <= lastIdInclusive;
-                halfDigits = Long.toString(Long.parseLong(halfDigits) + 1)) {
-            if (firstIdInclusive <= invalidId) {
-                result.add(invalidId);
+        int lastIdLength = lastId.length();
+        for (
+                int repeats = 2;
+                repeats <= lastIdLength;
+                ++repeats
+        ) {
+            String repeatedDigits = repeatedDigits(firstId, repeats);
+            for(
+                    long invalidId;
+                    (invalidId = fullInvalidId(repeatedDigits, repeats)) <= lastIdInclusive;
+                    repeatedDigits = Long.toString(Long.parseLong(repeatedDigits) + 1)) {
+                if (firstIdInclusive <= invalidId && invalidId <= lastIdInclusive) {
+                    result.add(invalidId);
+                }
             }
         }
         return result;
     }
 
-    private static String halfDigits(String id) {
+    private static long fullInvalidId(String repeatedDigits, int repeats) {
+        return Long.parseLong(repeatedDigits.repeat(repeats));
+    }
+
+    private static String repeatedDigits(String id, int repeats) {
         int length = id.length();
-        if (length % 2 == 0) {
-            return id.substring(0, length / 2);
+        if (length % repeats == 0) {
+            return id.substring(0, length / repeats);
         } else {
-            int halfLength = length / 2;
-            long halfValue = Math.powExact(10L, halfLength);
-            return Long.toString(halfValue);
+            int repeatedLength = length / repeats;
+            long repeatedValue = Math.powExact(10L, repeatedLength);
+            return Long.toString(repeatedValue);
         }
     }
 }
