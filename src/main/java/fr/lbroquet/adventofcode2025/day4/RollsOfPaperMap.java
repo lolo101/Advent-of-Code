@@ -1,5 +1,8 @@
 package fr.lbroquet.adventofcode2025.day4;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 class RollsOfPaperMap {
     private final char[][] map;
 
@@ -12,11 +15,30 @@ class RollsOfPaperMap {
      * @return quantity of accessible rolls on the map.
      */
     public long countAccessibleRollsOfPaper() {
-        long accessiblePositions = 0;
+        return accessiblePositions().size();
+    }
+
+    public long countRemovedRollsOfPaper() {
+        long removedRollsOfPaper = 0;
+        for (
+                Collection<Position> accessiblePositions = accessiblePositions();
+                !accessiblePositions.isEmpty();
+                accessiblePositions = accessiblePositions()
+        ) {
+            for (Position position : accessiblePositions) {
+                map[position.row()][position.column()] = 'x';
+            }
+            removedRollsOfPaper += accessiblePositions.size();
+        }
+        return removedRollsOfPaper;
+    }
+
+    private Collection<Position> accessiblePositions() {
+        Collection<Position> accessiblePositions = new ArrayList<>();
         for (int row = 0; row < map.length; row++) {
             for (int column = 0; column < map[row].length; column++) {
                 if (map[row][column] == '@' && accessible(row, column))
-                    ++accessiblePositions;
+                    accessiblePositions.add(new Position(row, column));
             }
         }
         return accessiblePositions;
