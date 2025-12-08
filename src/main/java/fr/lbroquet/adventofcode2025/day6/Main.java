@@ -2,47 +2,47 @@ package fr.lbroquet.adventofcode2025.day6;
 
 import fr.lbroquet.Input;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Main {
     static void main() throws IOException {
-        try (BufferedReader reader = Input.load(Main.class)) {
-            List<String[]> lines = new ArrayList<>();
-            for (
-                    String line;
-                    (line = reader.readLine()) != null;
-                ) {
-                lines.add(line.trim().split("\\s+"));
-            }
+        char[][] mathSheet = transpose(Input.loadMap(Main.class));
 
-            String[] operators = lines.removeLast();
-            long[][] operands = transpose(lines.toArray(new String[0][0]));
-
-            Collection<Operation> operations = new ArrayList<>();
-            for (int i = 0; i < operators.length; i++) {
-                operations.add(new Operation(
-                        operators[i].charAt(0),
-                        operands[i]
-                ));
+        Collection<Operation> operations = new ArrayList<>();
+        Collection<Long> operands = new ArrayList<>();
+        char operator = '\0';
+        for (char[] lineChars : mathSheet) {
+            char maybeOperator = lineChars[lineChars.length - 1];
+            if (maybeOperator == '+' || maybeOperator == '*') {
+                operator = maybeOperator;
             }
-            long total = operations.stream().reduce(0L, (sum, op) -> sum + op.compute(), Long::sum);
-            IO.println("Grand total=" + total);
+            String lineString = new String(lineChars, 0, lineChars.length - 1).trim();
+            if(lineString.isBlank()) {
+                operations.add(new Operation(operator, operands.toArray(new Long[0])));
+                operands.clear();
+            } else {
+                operands.add(Long.parseLong(lineString));
+            }
         }
+        // add last pending operation
+        operations.add(new Operation(operator, operands.toArray(new Long[0])));
+
+        long total = operations.stream().reduce(0L, (sum, op) -> sum + op.compute(), Long::sum);
+        IO.println("Grand total=" + total);
     }
 
-    private static long[][] transpose(String[][] array) {
-        long[][] result = new long[array[0].length][];
+    private static char[][] transpose(char[][] array) {
+        char[][] result = new char[array[0].length][];
         for (int column = 0; column < result.length; column++) {
-            result[column] = new long[array.length];
+            result[column] = new char[array.length];
         }
 
         for (int row = 0; row < array.length; row++) {
             for (int column = 0; column < array[row].length; column++) {
-                result[column][row] = Long.parseLong(array[row][column]);
+                char c = array[row][column];
+                result[column][row] = c == '_' ? ' ' : c;
             }
         }
         return result;
