@@ -43,13 +43,13 @@ public class Contraption {
         visited.clear();
         while (!toVisit.isEmpty()) {
             Beam currentBeam = toVisit.removeFirst();
-            Set<Beam> tileBeams = visited.computeIfAbsent(currentBeam.position(), unused -> new HashSet<>());
+            Set<Beam> tileBeams = visited.computeIfAbsent(currentBeam.position(), _ -> new HashSet<>());
             if (tileBeams.add(currentBeam)) {
                 char tile = getTile(currentBeam.position());
                 Collection<Beam> nextBeams = currentBeam.nextBeams(tile);
                 toVisit.addAll(nextBeams);
             } else {
-//                System.out.println(STR."Skip cycle @ \{currentBeam}");
+//                IO.println(STR."Skip cycle @ \{currentBeam}");
             }
         }
         return countEnergizedTiles();

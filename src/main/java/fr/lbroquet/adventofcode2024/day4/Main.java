@@ -8,9 +8,9 @@ public class Main {
     public static void main() throws IOException {
         char[][] array = Input.loadMap(Main.class);
         WordSearch wordSearch = new WordSearch(array);
-        System.out.println("XMAS count: " + wordSearch.count());
+        IO.println("XMAS count: " + wordSearch.count());
 
         CrossMas crossMas = new CrossMas(array);
-        System.out.println("X-MAS count: " + crossMas.count());
+        IO.println("X-MAS count: " + crossMas.count());
     }
 }

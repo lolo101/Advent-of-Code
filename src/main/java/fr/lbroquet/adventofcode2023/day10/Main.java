@@ -9,9 +9,9 @@ public class Main {
         char[][] mazeArray = Input.loadMap(Main.class);
         Maze maze = new Maze(mazeArray);
         System.out.printf("Farthest distance from start: %d%n", maze.farthestDistanceFromStart());
-        System.out.println(maze.loopMap());
+        IO.println(maze.loopMap());
         String partitionMap = maze.partitionMap();
-        System.out.println(partitionMap);
+        IO.println(partitionMap);
         System.out.printf("Inside surface: %d%n", partitionMap.chars().filter(c -> c == 'I').count());
     }
 }

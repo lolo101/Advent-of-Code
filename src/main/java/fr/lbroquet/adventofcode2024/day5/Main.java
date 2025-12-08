@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Comparator;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         Collection<String> rules = new ArrayList<>();
         Collection<String[]> updates = new ArrayList<>();
         try (BufferedReader reader = Input.load(Main.class)) {
@@ -29,7 +29,7 @@ public class Main {
                 .filter(pageComparator::ordered)
                 .mapToInt(Main::middlePage)
                 .sum();
-        System.out.println("Sum of ordered middle pages: " + sumOrdered);
+        IO.println("Sum of ordered middle pages: " + sumOrdered);
 
         int sumInitiallyUnordered = updates
                 .stream()
@@ -37,7 +37,7 @@ public class Main {
                 .map(update -> sort(update, pageComparator))
                 .mapToInt(Main::middlePage)
                 .sum();
-        System.out.println("Sum of unordered middle pages after ordering: " + sumInitiallyUnordered);
+        IO.println("Sum of unordered middle pages after ordering: " + sumInitiallyUnordered);
     }
 
     private static String[] sort(String[] update, Comparator<String> pageComparator) {

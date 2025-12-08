@@ -6,7 +6,7 @@ class KeySquare extends Key {
 
     @Override
     public void show() {
-        System.out.println(key);
+        IO.println(key);
     }
 
     @Override

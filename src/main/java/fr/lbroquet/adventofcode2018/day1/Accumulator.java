@@ -17,7 +17,7 @@ class Accumulator {
 
         freqs.add(freq);
         for(int loop = 1;; ++loop) {
-            System.out.println("Loop #" + loop);
+            IO.println("Loop #" + loop);
             for (Integer change : changes) {
                 freq += change;
                 if (!freqs.add(freq)) {

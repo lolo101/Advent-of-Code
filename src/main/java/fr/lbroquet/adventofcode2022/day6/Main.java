@@ -2,15 +2,19 @@ package fr.lbroquet.adventofcode2022.day6;
 
 import fr.lbroquet.Input;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        String stream = Input.load(Main.class).readLine();
+    public static void main() throws IOException {
+        try (BufferedReader reader = Input.load(Main.class)) {
+            String stream = reader.readLine();
 
-        Protocol protocol = new Protocol(stream);
+            Protocol protocol = new Protocol(stream);
 
-        System.out.println(protocol.startOfPacket());
-        System.out.println(protocol.startOfMessage());
+            IO.println(protocol.startOfPacket());
+            IO.println(protocol.startOfMessage());
+        }
+
     }
 }

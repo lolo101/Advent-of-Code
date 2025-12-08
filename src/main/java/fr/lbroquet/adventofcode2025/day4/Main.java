@@ -9,7 +9,7 @@ public class Main {
         RollsOfPaperMap map = new RollsOfPaperMap(Input.loadMap(Main.class));
         long accessibleRollsOfPaper = map.countAccessibleRollsOfPaper();
         long removedRollsOfPaper = map.countRemovedRollsOfPaper();
-        System.out.println("Accessible rolls of paper: " + accessibleRollsOfPaper);
-        System.out.println("Total removed rolls of paper: " + removedRollsOfPaper);
+        IO.println("Accessible rolls of paper: " + accessibleRollsOfPaper);
+        IO.println("Total removed rolls of paper: " + removedRollsOfPaper);
     }
 }

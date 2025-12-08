@@ -14,7 +14,7 @@ class KeyDiamond extends Key {
 
     @Override
     public void show() {
-        System.out.println(KEYS[index]);
+        IO.println(KEYS[index]);
     }
 
     @Override

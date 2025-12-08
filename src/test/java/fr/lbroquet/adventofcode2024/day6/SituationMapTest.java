@@ -40,7 +40,7 @@ class SituationMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         SituationMap situationMap = new SituationMap(array);
-        System.out.println(situationMap.print());
+        IO.println(situationMap.print());
         assertEquals(6, situationMap.possibleObstructions());
     }
 
@@ -55,7 +55,7 @@ class SituationMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         SituationMap situationMap = new SituationMap(array);
-        System.out.println(situationMap.print());
+        IO.println(situationMap.print());
         assertEquals(1, situationMap.possibleObstructions());
     }
 
@@ -70,7 +70,7 @@ class SituationMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         SituationMap situationMap = new SituationMap(array);
-        System.out.println(situationMap.print());
+        IO.println(situationMap.print());
         assertEquals(1, situationMap.possibleObstructions());
     }
 
@@ -85,7 +85,7 @@ class SituationMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         SituationMap situationMap = new SituationMap(array);
-        System.out.println(situationMap.print());
+        IO.println(situationMap.print());
         assertEquals(1, situationMap.possibleObstructions());
     }
 
@@ -101,7 +101,7 @@ class SituationMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         SituationMap situationMap = new SituationMap(array);
-        System.out.println(situationMap.print());
+        IO.println(situationMap.print());
         assertEquals(1, situationMap.possibleObstructions());
     }
 
@@ -117,7 +117,7 @@ class SituationMapTest {
                 """;
         char[][] array = input.lines().map(String::toCharArray).toArray(char[][]::new);
         SituationMap situationMap = new SituationMap(array);
-        System.out.println(situationMap.print());
+        IO.println(situationMap.print());
         assertEquals(2, situationMap.possibleObstructions());
     }
 }

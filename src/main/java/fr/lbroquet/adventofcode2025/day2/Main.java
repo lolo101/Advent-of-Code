@@ -15,7 +15,7 @@ public class Main {
                     .map(Range::invalidIds)
                     .mapToLong(Main::sum)
                     .sum();
-            System.out.println("Total invalid IDs: " + totalInvalidIds);
+            IO.println("Total invalid IDs: " + totalInvalidIds);
         }
     }
 

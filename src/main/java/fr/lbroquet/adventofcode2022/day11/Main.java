@@ -9,10 +9,10 @@ public class Main {
 
     private static final int NUMBER_OF_ROUNDS = 10_000;
 
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         Monkeys monkeys = readMonkeys();
         for (int round = 0; round < NUMBER_OF_ROUNDS; round++) {
-            System.out.println("Round " + round);
+            IO.println("Round " + round);
             monkeys.playOneRound();
         }
         System.out.printf("Monkey business level: %d%n", monkeys.monkeyBusiness());

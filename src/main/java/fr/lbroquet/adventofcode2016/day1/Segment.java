@@ -42,7 +42,7 @@ class Segment {
             int hY = horizontal.position.y;
 
             if (hMinX <= vX && vX <= hMaxX && vMinY <= hY && hY <= vMaxY) {
-                System.out.println("Intersection @ " + new Position(vX, hY).distance1());
+                IO.println("Intersection @ " + new Position(vX, hY).distance1());
             }
         }
     }

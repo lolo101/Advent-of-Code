@@ -2,15 +2,19 @@ package fr.lbroquet.adventofcode2022.day9;
 
 import fr.lbroquet.Input;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main() throws IOException {
         Rope rope = new Rope();
-        Input.load(Main.class)
-                .lines()
+        try (BufferedReader reader = Input.load(Main.class)) {
+            reader.lines()
                 .map(Movement::of)
                 .forEach(rope::move);
+        }
 
-        System.out.println(rope.tailPositions().size());
-        System.out.println(rope.printTailPositions());
+        IO.println(rope.tailPositions().size());
+        IO.println(rope.printTailPositions());
     }
 }

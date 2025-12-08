@@ -1,33 +1,27 @@
 package fr.lbroquet.adventofcode2018.day1;
 
-import static java.util.stream.Collectors.toList;
+import fr.lbroquet.Input;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
+import static java.util.stream.Collectors.toList;
 
 public class Main {
-
-    private static BufferedReader loadInput() {
-        InputStream inputStream = Main.class.getResourceAsStream("input");
-        return new BufferedReader(new InputStreamReader(inputStream));
-    }
-
-    public static void main(String[] args) throws IOException {
-        try (BufferedReader reader = loadInput()) {
+    public static void main() throws IOException {
+        try (BufferedReader reader = Input.load(Main.class)) {
             int sum = reader.lines()
                     .mapToInt(Integer::parseInt)
                     .sum();
-            System.out.println("Final frequency : " + sum);
+            IO.println("Final frequency : " + sum);
         }
 
-        try (BufferedReader reader = loadInput()) {
+        try (BufferedReader reader = Input.load(Main.class)) {
             Iterable<Integer> changes = reader.lines()
                     .map(Integer::valueOf)
                     .collect(toList());
             Accumulator accu = new Accumulator(changes);
-            System.out.println("First repeated frequency : " + accu.firstDuplicate());
+            IO.println("First repeated frequency : " + accu.firstDuplicate());
         }
     }
 }

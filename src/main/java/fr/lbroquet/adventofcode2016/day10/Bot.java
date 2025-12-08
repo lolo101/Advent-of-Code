@@ -47,7 +47,7 @@ class Bot implements Consumer<Integer> {
         int lower = values.first();
         int higher = values.last();
         if (lower == 17 && higher == 61) {
-            System.out.println("Bot #" + id + " wins !");
+            IO.println("Bot #" + id + " wins !");
         }
     }
 

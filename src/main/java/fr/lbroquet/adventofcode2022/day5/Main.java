@@ -2,6 +2,8 @@ package fr.lbroquet.adventofcode2022.day5;
 
 import fr.lbroquet.Input;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -31,17 +33,18 @@ public class Main {
             new StackOfCrates("ZWMSCDJ")
     );
 
-    public static void main(String[] args) {
-        Input.load(Main.class)
-                .lines()
+    public static void main() throws IOException {
+        try (BufferedReader reader = Input.load(Main.class)) {
+            reader.lines()
                 .map(Instruction::of)
                 .forEach(instruction -> instruction.apply(stacks));
+        }
 
         String topCrates = stacks.stream()
                 .map(StackOfCrates::topCrate)
                 .map(Crate::toString)
                 .collect(joining());
 
-        System.out.println(topCrates);
+        IO.println(topCrates);
     }
 }

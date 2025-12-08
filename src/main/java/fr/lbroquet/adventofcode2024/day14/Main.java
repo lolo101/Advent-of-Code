@@ -18,7 +18,7 @@ public class Main {
 
     private static final Pattern ROBOT = Pattern.compile("p=(?<x>\\d+),(?<y>\\d+) v=(?<vx>-?\\d+),(?<vy>-?\\d+)");
 
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         try (BufferedReader reader = Input.load(Main.class)) {
             List<Robot> robots = reader.lines().map(Main::toRobot).toList();
             for (int second = 1; second <= 10000; second++) {
@@ -46,7 +46,7 @@ public class Main {
             }
             s.append('\n');
         }
-        System.out.println(s);
+        IO.println(s);
     }
 
     static Robot toRobot(String s) {

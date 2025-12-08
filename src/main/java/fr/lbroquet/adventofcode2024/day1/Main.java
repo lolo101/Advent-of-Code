@@ -2,6 +2,8 @@ package fr.lbroquet.adventofcode2024.day1;
 
 import fr.lbroquet.Input;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -14,14 +16,16 @@ public class Main {
     private static final List<Integer> leftList = new ArrayList<>();
     private static final List<Integer> rightList = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Input.load(Main.class).lines().map(SEPARATOR::split).forEach(Main::collectIds);
+    public static void main() throws IOException {
+        try (BufferedReader reader = Input.load(Main.class)) {
+            reader.lines().map(SEPARATOR::split).forEach(Main::collectIds);
+        }
         sort(leftList);
         sort(rightList);
         long totalDistance = totalDistance(new ArrayList<>(leftList), new ArrayList<>(rightList));
         long similarity = similarity(new ArrayList<>(leftList), new ArrayList<>(rightList));
-        System.out.println("total distance: " + totalDistance);
-        System.out.println("similarity: " + similarity);
+        IO.println("total distance: " + totalDistance);
+        IO.println("similarity: " + similarity);
     }
 
     private static void collectIds(String[] ids) {

@@ -12,7 +12,7 @@ public class Main {
                     .map(Main::toBank)
                     .mapToLong(bank -> bank.outputJoltage(12))
                     .sum();
-            System.out.println("Total output joltage: " + totalOutputJoltage);
+            IO.println("Total output joltage: " + totalOutputJoltage);
         }
     }
 

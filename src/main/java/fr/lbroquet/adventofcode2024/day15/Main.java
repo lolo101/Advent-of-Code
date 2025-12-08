@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         try (BufferedReader reader = Input.load(Main.class)) {
             char[][] map = warehouse(reader);
             char[] movements = movements(reader);
 
             Warehouse warehouse = new Warehouse(map);
             warehouse.moveRobot(movements);
-            System.out.println("Sum of boxes GPS: " + warehouse.sumOfBoxesGPS());
+            IO.println("Sum of boxes GPS: " + warehouse.sumOfBoxesGPS());
 
             WideWarehouse wideWarehouse = new WideWarehouse(map);
             wideWarehouse.show();
             wideWarehouse.moveRobot(movements);
-            System.out.println("Sum of wide boxes GPS: " + wideWarehouse.sumOfBoxesGPS());
+            IO.println("Sum of wide boxes GPS: " + wideWarehouse.sumOfBoxesGPS());
         }
     }
 

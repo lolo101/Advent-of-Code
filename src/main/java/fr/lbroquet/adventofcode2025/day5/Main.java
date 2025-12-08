@@ -10,8 +10,8 @@ public class Main {
         try (BufferedReader reader = Input.load(Main.class)) {
             FreshIngredientRanges freshIngredientRanges = freshIngredientRanges(reader);
             long freshIngredientCount = reader.lines().mapToLong(Long::parseLong).filter(freshIngredientRanges::contains).count();
-            System.out.println("Quantity of fresh ingredients: " + freshIngredientCount);
-            System.out.println("Ingredients in ranges: " + freshIngredientRanges.size());
+            IO.println("Quantity of fresh ingredients: " + freshIngredientCount);
+            IO.println("Ingredients in ranges: " + freshIngredientRanges.size());
         }
     }
 

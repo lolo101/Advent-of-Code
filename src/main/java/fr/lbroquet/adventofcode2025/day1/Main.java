@@ -20,7 +20,7 @@ public class Main {
                     ))
                     .mapToInt(Integer::intValue)
                     .sum();
-            System.out.println("Number of clicks @ zero: " + sum);
+            IO.println("Number of clicks @ zero: " + sum);
         }
     }
 

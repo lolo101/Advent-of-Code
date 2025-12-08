@@ -9,6 +9,6 @@ public class Main {
         char[][] mapArray = Input.loadMap(Main.class);
         HeatMap heatMap = new HeatMap(mapArray);
         System.out.printf("Least heat loss: %d%n", heatMap.leastHeatLoss(new Position(140, 140)));
-        System.out.println(heatMap.drawMap());
+        IO.println(heatMap.drawMap());
     }
 }

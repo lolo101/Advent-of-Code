@@ -2,15 +2,19 @@ package fr.lbroquet.adventofcode2024.day7;
 
 import fr.lbroquet.Input;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Main {
     private static final Pattern SEPARATOR = Pattern.compile(": ");
 
-    public static void main(String[] args) {
-        long total = Input.load(Main.class).lines().map(Main::toEquation).filter(Equation::possible).mapToLong(Equation::test).sum();
-        System.out.println("Total calibration result = " + total);
+    public static void main() throws IOException {
+        try (BufferedReader reader = Input.load(Main.class)) {
+            long total = reader.lines().map(Main::toEquation).filter(Equation::possible).mapToLong(Equation::test).sum();
+            IO.println("Total calibration result = " + total);
+        }
     }
 
     private static Equation toEquation(String s) {

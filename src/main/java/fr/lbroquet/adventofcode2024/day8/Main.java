@@ -8,6 +8,6 @@ public class Main {
     public static void main() throws IOException {
         char[][] map = Input.loadMap(Main.class);
         AntennaMap antennaMap = new AntennaMap(map);
-        System.out.println("Number of antinodes: " + antennaMap.countAntinodes());
+        IO.println("Number of antinodes: " + antennaMap.countAntinodes());
     }
 }

@@ -12,7 +12,7 @@ enum AcceptorType {
     private static final Map<String, Bot> bots = new HashMap<>();
     private final Function<String, Consumer<Integer>> function;
 
-    private AcceptorType(Function<String, Consumer<Integer>> function) {
+    AcceptorType(Function<String, Consumer<Integer>> function) {
         this.function = function;
     }
 
@@ -30,6 +30,6 @@ enum AcceptorType {
     }
 
     private static Consumer<Integer> output(String id) {
-        return value -> System.out.println("Output " + id + " get value " + value);
+        return value -> IO.println("Output " + id + " get value " + value);
     }
 }

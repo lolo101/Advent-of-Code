@@ -16,9 +16,9 @@ public class Main {
         }
     }
 
-    public static void main(String... args) {
+    public static void main() {
         method1();
-        System.out.println("--------");
+        IO.println("--------");
         method2();
     }
 
@@ -31,7 +31,7 @@ public class Main {
                     && digest[1] == 0
                     && (digest[2] & 0xff) < 16) {
                 password.append(Integer.toHexString(digest[2]));
-                System.out.println(password);
+                IO.println(password);
             }
         }
     }
@@ -49,7 +49,7 @@ public class Main {
                     int code = (digest[3] & 0xff) >> 4;
                     password.setCharAt(position, toHexChar(code));
                     ++len;
-                    System.out.println(password);
+                    IO.println(password);
                 }
             }
         }

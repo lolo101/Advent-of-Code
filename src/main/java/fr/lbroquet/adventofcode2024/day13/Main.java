@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         Collection<ClawMachine> clawMachines = new ArrayList<>();
         try (BufferedReader reader = Input.load(Main.class)) {
             do {
@@ -18,6 +18,6 @@ public class Main {
                 clawMachines.add(new ClawMachine(buttonA, buttonB, prize));
             } while (reader.readLine() != null);
         }
-        System.out.println("Fewest tokens to spend: " + clawMachines.stream().filter(ClawMachine::winnable).mapToLong(ClawMachine::fewestToken).sum());
+        IO.println("Fewest tokens to spend: " + clawMachines.stream().filter(ClawMachine::winnable).mapToLong(ClawMachine::fewestToken).sum());
     }
 }

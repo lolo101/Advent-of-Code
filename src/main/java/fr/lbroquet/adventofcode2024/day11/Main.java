@@ -13,13 +13,13 @@ public class Main {
 
     private static final Map<String, Map<Integer, Long>> cache = new HashMap<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main() throws IOException {
         try (BufferedReader reader = Input.load(Main.class)) {
             Collection<String> stones = Arrays.asList(reader.readLine().split(" "));
             long count = stones.stream().mapToLong(stone -> blink(stone, 25)).sum();
-            System.out.println("Stones after 25 blinks: " + count);
+            IO.println("Stones after 25 blinks: " + count);
             long longCount = stones.stream().mapToLong(stone -> blink(stone, 75)).sum();
-            System.out.println("Stones after 75 blinks: " + longCount);
+            IO.println("Stones after 75 blinks: " + longCount);
         }
     }
 

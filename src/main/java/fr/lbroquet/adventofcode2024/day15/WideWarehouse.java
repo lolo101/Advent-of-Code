@@ -12,7 +12,7 @@ class WideWarehouse {
         robot = findRobot();
     }
 
-    private char[][] widen(char[][] map) {
+    private static char[][] widen(char[][] map) {
         List<char[]> wideMap = new ArrayList<>();
         for (char[] row : map) {
             char[] wideRow = new char[row.length * 2];
@@ -189,6 +189,6 @@ class WideWarehouse {
             }
             sb.append('\n');
         }
-        System.out.println(sb);
+        IO.println(sb);
     }
 }
