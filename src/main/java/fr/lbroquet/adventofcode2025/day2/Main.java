@@ -20,7 +20,7 @@ public class Main {
     }
 
     private static long sum(Collection<Long> longs) {
-        return Stream.of(longs.toArray(new Long[0])).mapToLong(Long::longValue).sum();
+        return Stream.of(longs.toArray(Long[]::new)).mapToLong(Long::longValue).sum();
     }
 
     private static Range toRange(String rangeAsString) {
