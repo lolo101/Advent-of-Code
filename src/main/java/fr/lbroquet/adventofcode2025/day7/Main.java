@@ -9,5 +9,6 @@ public class Main {
         char[][] map = Input.loadMap(Main.class);
         TachyonManifold manifold = new TachyonManifold(map);
         IO.println("Tachyon beam split times: " + manifold.countSplits());
+        IO.println("Tachyon beam timelines: " + manifold.countTimelines());
     }
 }
