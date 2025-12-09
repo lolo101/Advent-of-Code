@@ -14,20 +14,10 @@ public class Main {
                 .<Operation>gather(Gatherer.ofSequential(
                         Memo::new,
                         (memo, lineChars, downstream) -> {
-                            char maybeOperator = lineChars[lineChars.length - 1];
-                            if (maybeOperator == '+' || maybeOperator == '*') {
-                                memo.operator = maybeOperator;
-                            }
-                            String lineString = new String(lineChars, 0, lineChars.length - 1).trim();
-                            if (lineString.isBlank()) {
-                                downstream.push(new Operation(memo.operator, memo.operands.toArray(new Long[0])));
-                                memo.operands.clear();
-                            } else {
-                                memo.operands.add(Long.parseLong(lineString));
-                            }
-                            return true;
+                            integrateOperator(memo, lineChars);
+                            return integrateOperand(memo, lineChars, downstream);
                         },
-                        (memo, downstream) -> downstream.push(new Operation(memo.operator, memo.operands.toArray(new Long[0])))
+                        (memo, downstream) -> downstream.push(new Operation(memo))
                 ))
                 .reduce(0L, (sum, op) -> sum + op.compute(), Long::sum);
 
@@ -47,5 +37,22 @@ public class Main {
             }
         }
         return result;
+    }
+
+    private static void integrateOperator(Memo memo, char[] lineChars) {
+        char maybeOperator = lineChars[lineChars.length - 1];
+        if (maybeOperator == '+' || maybeOperator == '*') {
+            memo.operator = maybeOperator;
+        }
+    }
+
+    private static boolean integrateOperand(Memo memo, char[] lineChars, Gatherer.Downstream<? super Operation> downstream) {
+        String lineString = new String(lineChars, 0, lineChars.length - 1).trim();
+        if (lineString.isBlank()) {
+            return downstream.push(new Operation(memo));
+        } else {
+            memo.addOperand(lineString);
+            return true;
+        }
     }
 }
